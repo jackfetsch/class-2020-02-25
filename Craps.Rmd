@@ -1,0 +1,26 @@
+---
+title: "Craps"
+author: "Jack Fetsch"
+date: "2/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+
+```
+
+```{r function, include=FALSE}
+roll_one_die <- function(x) {
+  sample(x = 1:6, size = 1, replace = TRUE)
+}
+
+roll_two_dice <- function(x) {
+   roll_one_die() + roll_one_die()
+}
+
+
+results <- tibble(res = map_int(rep(1,1000), ~roll_two_dice()))
+
+ggplot(results, aes(x = res)) + geom_histogram(binwidth = 1)
+```
